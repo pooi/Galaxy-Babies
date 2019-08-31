@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="custom_actionbar_size">40dp</dimen>
+    <dimen name="custom_actionbar_title_size">16sp</dimen>
+    <dimen name="custom_actionbar_sub_title_size">12sp</dimen>
+
+    <dimen name="layout_title_size">8sp</dimen>
+    <dimen name="layout_content_size">8sp</dimen>
+    <dimen name="layout_reference_size">6sp</dimen>
+
+<!--    ONE UI   -->
+    <dimen name="activity_margin_content">24dp</dimen>
+    <dimen name="one_ui_margin_horizontal">24dp</dimen>
+    <dimen name="one_ui_margin_vertical">12dp</dimen>
+    <dimen name="one_ui_radius_lg">26dp</dimen>
+    <dimen name="one_ui_radius_md">20dp</dimen>
+    <dimen name="one_ui_radius_sm">12dp</dimen>
+
+<!--    ONE UI FONT SZE     -->
+    <dimen name="one_ui_extend_title">40sp</dimen>
+    <dimen name="one_ui_dialog_title">20sp</dimen>
+    <dimen name="one_ui_title">19sp</dimen>
+    <dimen name="one_ui_main_list">18sp</dimen>
+    <dimen name="one_ui_text_button">17sp</dimen>
+    <dimen name="one_ui_body_description">16sp</dimen>
+    <dimen name="one_ui_raised_button">15sp</dimen>
+    <dimen name="one_ui_sub_header">14sp</dimen>
+    <dimen name="one_ui_sub_list">13sp</dimen>
+
+
+    <!-- Observable ScrollView -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="flexible_space_height">72dp</dimen>
+    <dimen name="flexible_space_image_height">240dp</dimen>
+    <dimen name="flexible_space_show_fab_offset">120dp</dimen>
+
+    <dimen name="margin_standard">16dp</dimen>
+
+    <!-- Font Size-->
+    <dimen name="default_font_size">20sp</dimen>
+    <dimen name="default_font_small_size">18sp</dimen>
+    <dimen name="default_menu_font_size">30sp</dimen>
+    <dimen name="default_menu_font_big_size">40sp</dimen>
+
+    <!-- Menu Button -->
+    <dimen name="menu_btn_elevation">20dp</dimen>
+    <dimen name="layout_elevation">10dp</dimen>
+    <dimen name="menu_btn_radius">10dp</dimen>
+    <dimen name="menu_btn_height">120dp</dimen>
+
+
+
+</resources>
