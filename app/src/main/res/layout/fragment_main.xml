@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/one_ui_bg"
     >
 
 
@@ -85,18 +86,18 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/scrollableview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/one_ui_bg"
-        android:paddingHorizontal="@dimen/one_ui_margin_horizontal"
         android:paddingVertical="@dimen/one_ui_margin_vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:clipToPadding="false"
         android:clipChildren="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         />
+
+
 
     <!--    <android.support.design.widget.FloatingActionButton-->
     <!--        android:layout_width="wrap_content"-->

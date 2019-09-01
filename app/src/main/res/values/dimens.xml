@@ -18,15 +18,15 @@
     <dimen name="one_ui_radius_sm">12dp</dimen>
 
 <!--    ONE UI FONT SZE     -->
-    <dimen name="one_ui_extend_title">40sp</dimen>
-    <dimen name="one_ui_dialog_title">20sp</dimen>
-    <dimen name="one_ui_title">19sp</dimen>
-    <dimen name="one_ui_main_list">18sp</dimen>
-    <dimen name="one_ui_text_button">17sp</dimen>
-    <dimen name="one_ui_body_description">16sp</dimen>
-    <dimen name="one_ui_raised_button">15sp</dimen>
-    <dimen name="one_ui_sub_header">14sp</dimen>
-    <dimen name="one_ui_sub_list">13sp</dimen>
+    <dimen name="one_ui_font_extend_title">40sp</dimen>
+    <dimen name="one_ui_font_dialog_title">20sp</dimen>
+    <dimen name="one_ui_font_title">19sp</dimen>
+    <dimen name="one_ui_font_main_list">18sp</dimen>
+    <dimen name="one_ui_font_text_button">17sp</dimen>
+    <dimen name="one_ui_font_body_description">16sp</dimen>
+    <dimen name="one_ui_font_raised_button">15sp</dimen>
+    <dimen name="one_ui_font_sub_header">14sp</dimen>
+    <dimen name="one_ui_font_sub_list">13sp</dimen>
 
 
     <!-- Observable ScrollView -->
