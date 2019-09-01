@@ -47,4 +47,10 @@ public class BaseFragment extends Fragment {
         return ContextCompat.getColor(context, id);
     }
 
+    public int getDP(Context context, int dps){
+        float scale = context.getResources().getDisplayMetrics().density;
+        int pixels = (int) (dps * scale + 0.5f);
+        return pixels;
+    }
+
 }
