@@ -15,12 +15,14 @@ import com.samsung.galaxy_babies.fragment.EmptyFragment;
 import com.samsung.galaxy_babies.fragment.MainFragment;
 import com.samsung.galaxy_babies.fragment.MyBabyFragment;
 import com.samsung.galaxy_babies.obj.Baby;
+import com.samsung.galaxy_babies.obj.Measure;
 import com.samsung.galaxy_babies.obj.User;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -80,25 +82,75 @@ public class MainActivity extends AppCompatActivity{
         user.setLastName("홍");
         user.setEmail("galaxy.babiez@gmail.com");
 
+        Random random = new Random();
+
         Baby baby1 = new Baby();
-        baby1.setId("2222222");
-        baby1.setHeight(3.7d);
-        baby1.setWeight(3.5d);
-        baby1.setFirstName("영지");
-        baby1.setLastName("이");
-        baby1.setGender(Baby.Gender.WOMEN);
-        baby1.setBirthday(new GregorianCalendar(2019, Calendar.JANUARY, 8));
-        baby1.setProfileImg("https://img.momtalk.kr/image/information/2018/08/16/cbf38829-f4fb-4262-9ca3-1d7ea84051b2_1534382010.jpg");
+        {
+            baby1.setId("2222222");
+            ArrayList<Measure> heights = new ArrayList<>();
+            ArrayList<Measure> weights = new ArrayList<>();
+            heights.add(new Measure(new GregorianCalendar(2019, Calendar.JANUARY, 8), 3.7));
+            weights.add(new Measure(new GregorianCalendar(2019, Calendar.JANUARY, 8), 3.5));
+            for (int i = 1; i < 10; i++) {
+                Measure preH = heights.get(i-1);
+                Measure preW = weights.get(i-1);
+                heights.add(new Measure(
+                        new GregorianCalendar(
+                                preH.getDate().get(Calendar.YEAR),
+                                preH.getDate().get(Calendar.MONTH),
+                                preH.getDate().get(Calendar.DAY_OF_MONTH)+1),
+                        preH.getValue()+random.nextDouble()/10
+                ));
+                weights.add(new Measure(
+                        new GregorianCalendar(
+                                preW.getDate().get(Calendar.YEAR),
+                                preW.getDate().get(Calendar.MONTH),
+                                preW.getDate().get(Calendar.DAY_OF_MONTH)+1),
+                        preW.getValue()+random.nextDouble()/10
+                ));
+            }
+            baby1.setHeights(heights);
+            baby1.setWeights(weights);
+            baby1.setFirstName("영지");
+            baby1.setLastName("이");
+            baby1.setGender(Baby.Gender.WOMEN);
+            baby1.setBirthday(new GregorianCalendar(2019, Calendar.JANUARY, 8));
+            baby1.setProfileImg("https://img.momtalk.kr/image/information/2018/08/16/cbf38829-f4fb-4262-9ca3-1d7ea84051b2_1534382010.jpg");
+        }
 
         Baby baby2 = new Baby();
-        baby2.setId("3333333");
-        baby2.setHeight(4.7d);
-        baby2.setWeight(2.9d);
-        baby2.setFirstName("승일");
-        baby2.setLastName("강");
-        baby2.setGender(Baby.Gender.MEN);
-        baby2.setBirthday(new GregorianCalendar(2019, Calendar.FEBRUARY, 10));
-        baby2.setProfileImg("https://i.pinimg.com/236x/1e/f8/77/1ef8778371a2b9df27770b4c8f4a2962.jpg");
+        {
+            baby2.setId("3333333");
+            ArrayList<Measure> heights = new ArrayList<>();
+            ArrayList<Measure> weights = new ArrayList<>();
+            heights.add(new Measure(new GregorianCalendar(2019, Calendar.MARCH, 2), 2.7));
+            weights.add(new Measure(new GregorianCalendar(2019, Calendar.MARCH, 2), 2.9));
+            for (int i = 1; i < 10; i++) {
+                Measure preH = heights.get(i-1);
+                Measure preW = weights.get(i-1);
+                heights.add(new Measure(
+                        new GregorianCalendar(
+                                preH.getDate().get(Calendar.YEAR),
+                                preH.getDate().get(Calendar.MONTH),
+                                preH.getDate().get(Calendar.DAY_OF_MONTH)+1),
+                        preH.getValue()+random.nextDouble()/10
+                ));
+                weights.add(new Measure(
+                        new GregorianCalendar(
+                                preW.getDate().get(Calendar.YEAR),
+                                preW.getDate().get(Calendar.MONTH),
+                                preW.getDate().get(Calendar.DAY_OF_MONTH)+1),
+                        preW.getValue()+random.nextDouble()/10
+                ));
+            }
+            baby2.setHeights(heights);
+            baby2.setWeights(weights);
+            baby2.setFirstName("승일");
+            baby2.setLastName("강");
+            baby2.setGender(Baby.Gender.MEN);
+            baby2.setBirthday(new GregorianCalendar(2019, Calendar.FEBRUARY, 10));
+            baby2.setProfileImg("https://i.pinimg.com/236x/1e/f8/77/1ef8778371a2b9df27770b4c8f4a2962.jpg");
+        }
 
         ArrayList<Baby> babies = new ArrayList<>();
         babies.add(baby1);

@@ -259,15 +259,10 @@
 
                         </LinearLayout>
 
-
-
-
-                        <TextView
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/chart_weight"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:gravity="center"
-                            android:text="Graph"
-                            />
+                            android:layout_height="150dp" />
 
                     </LinearLayout>
 
@@ -347,15 +342,10 @@
 
                         </LinearLayout>
 
-
-
-
-                        <TextView
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/chart_height"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:gravity="center"
-                            android:text="Graph"
-                            />
+                            android:layout_height="150dp" />
 
                     </LinearLayout>
 

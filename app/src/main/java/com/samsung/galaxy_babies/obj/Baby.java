@@ -20,10 +20,8 @@ public class Baby {
     private Gender gender;
 
 
-    private ArrayList<Double> heights;
-    private Double height;
-    private ArrayList<Double> weights;
-    private Double weight;
+    private ArrayList<Measure> heights;
+    private ArrayList<Measure> weights;
 
     private String profileImg;
 
@@ -92,45 +90,32 @@ public class Baby {
         return String.format("%d년 %d월 %d일 (%s개월)", this.birthday.get(Calendar.YEAR), this.birthday.get(Calendar.MONTH)+1, this.birthday.get(Calendar.DAY_OF_MONTH), getMonthDiff());
     }
 
-    public ArrayList<Double> getHeights() {
+
+    public ArrayList<Measure> getHeights() {
         return heights;
     }
 
-    public void setHeights(ArrayList<Double> heights) {
+    public void setHeights(ArrayList<Measure> heights) {
         this.heights = heights;
     }
 
-    public Double getHeight() {
-        return height;
-    }
-
-    public String getHeightString(){
-        return String.format("%.1f", this.getHeight());
-    }
-
-    public void setHeight(Double height) {
-        this.height = height;
-    }
-
-    public ArrayList<Double> getWeights() {
+    public ArrayList<Measure> getWeights() {
         return weights;
     }
 
-    public void setWeights(ArrayList<Double> weights) {
+    public void setWeights(ArrayList<Measure> weights) {
         this.weights = weights;
     }
 
-    public Double getWeight() {
-        return weight;
+    public String getHeightString(){
+        return String.format("%.1f", this.getHeights().get(this.getHeights().size()-1).value);
     }
 
     public String getWeightString(){
-        return String.format("%.1f", this.getWeight());
+        return String.format("%.1f", this.getWeights().get(this.getWeights().size()-1).value);
     }
 
-    public void setWeight(Double weight) {
-        this.weight = weight;
-    }
+
 
     public Gender getGender() {
         return gender;
