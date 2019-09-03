@@ -1,15 +1,9 @@
 package com.samsung.galaxy_babies.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Rect;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
-import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -66,7 +60,7 @@ public class MainListCustomAdapter extends RecyclerView.Adapter<MainListCustomAd
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //recycler view에 반복될 아이템 레이아웃 연결
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list,parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item,parent, false);
         return new ViewHolder(v);
     }
 
