@@ -14,6 +14,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.samsung.galaxy_babies.fragment.EmptyFragment;
 import com.samsung.galaxy_babies.fragment.MainFragment;
 import com.samsung.galaxy_babies.fragment.MyBabyFragment;
+import com.samsung.galaxy_babies.fragment.NoteFragment;
 import com.samsung.galaxy_babies.obj.Baby;
 import com.samsung.galaxy_babies.obj.Measure;
 import com.samsung.galaxy_babies.obj.User;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity{
     private TabLayout tabLayout;
 
     final MainFragment mainFragment = new MainFragment();
+    final NoteFragment noteFragment = new NoteFragment();
     final MyBabyFragment myBabyFragment = new MyBabyFragment();
     final EmptyFragment emptyFragment = new EmptyFragment();
 
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity{
 
         tabLayout = (TabLayout) findViewById(R.id.tab) ;
         tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView("홈")));
-        tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView("게임")));
+        tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView("육아 노트")));
         tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView("영화")));
         tabLayout.addTab(tabLayout.newTab().setCustomView(createTabView("우리 아이")));
 
@@ -173,6 +175,14 @@ public class MainActivity extends AppCompatActivity{
         switch (position) {
             case 0:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, mainFragment).commit();
+                break;
+            case 1:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    int flags = activity.getWindow().getDecorView().getSystemUiVisibility();
+                    flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+                    activity.getWindow().getDecorView().setSystemUiVisibility(flags);
+                }
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, noteFragment).commit();
                 break;
             case 3:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

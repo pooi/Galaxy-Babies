@@ -63,6 +63,10 @@ public class User {
         this.lastName = lastName;
     }
 
+    public String getName(){
+        return String.format("%s%s", this.lastName, this.firstName);
+    }
+
     public ArrayList<Baby> getBabies() {
         return babies;
     }
