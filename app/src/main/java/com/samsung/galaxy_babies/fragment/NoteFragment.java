@@ -179,6 +179,6 @@ public class NoteFragment extends BaseFragment implements OnAdapterSupport {
 
     @Override
     public void redirectActivity(Intent intent) {
-
+        startActivity(intent);
     }
 }

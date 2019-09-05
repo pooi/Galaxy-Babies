@@ -2,20 +2,18 @@ package com.samsung.galaxy_babies.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.samsung.galaxy_babies.R;
+import com.samsung.galaxy_babies.activity.BoardActivity;
 import com.samsung.galaxy_babies.obj.Board;
 import com.samsung.galaxy_babies.util.OnAdapterSupport;
 import com.samsung.galaxy_babies.util.OnLoadMoreListener;
@@ -91,6 +89,15 @@ public class NoteListCustomAdapter extends RecyclerView.Adapter<NoteListCustomAd
         holder.tv_viewCnt.setText(board.getViewCnt()+"");
         holder.tv_commentCnt.setText(board.getCommentCnt()+"");
         holder.tv_likeCnt.setText(board.getLikeCnt()+"");
+
+        holder.cv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, BoardActivity.class);
+                i.putExtra("data", board);
+                onAdapterSupport.redirectActivity(i);
+            }
+        });
 
 //        holder.tv_title.setText(log.getMsg());
 //        holder.tv_date.setText(AdditionalFunc.getDateTimeSrtString(log.getRegisteredDate()));
@@ -169,6 +176,7 @@ public class NoteListCustomAdapter extends RecyclerView.Adapter<NoteListCustomAd
 
     public final static class ViewHolder extends RecyclerView.ViewHolder {
 
+        CardView cv;
         ImageView mainImg;
         CircleImageView profileImg;
         TextView tv_nickname;
@@ -182,6 +190,7 @@ public class NoteListCustomAdapter extends RecyclerView.Adapter<NoteListCustomAd
 
         public ViewHolder(View v) {
             super(v);
+            cv = (CardView) v.findViewById(R.id.cv);
             mainImg = (ImageView) v.findViewById(R.id.img_main);
             profileImg = (CircleImageView) v.findViewById(R.id.img_profile);
             tv_nickname = (TextView) v.findViewById(R.id.tv_nickname);

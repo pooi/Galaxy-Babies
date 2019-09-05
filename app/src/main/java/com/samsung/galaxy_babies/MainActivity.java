@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity{
         user.setFirstName("길동");
         user.setLastName("홍");
         user.setEmail("galaxy.babiez@gmail.com");
+        user.setProfileImg("http://www.sisaweek.com/news/photo/201811/115942_99512_5431.jpg");
 
         Random random = new Random();
 

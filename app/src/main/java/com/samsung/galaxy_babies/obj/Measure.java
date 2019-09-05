@@ -1,8 +1,9 @@
 package com.samsung.galaxy_babies.obj;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class Measure {
+public class Measure  implements Serializable {
     Calendar date;
     double value;
 

@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/one_ui_bg"
+    >
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:adjustViewBounds="true"
+        app:elevation="0dp"
+        >
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/one_ui_bg"
+            app:expandedTitleMarginStart="@dimen/activity_margin_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/anim_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingHorizontal="@dimen/one_ui_margin_horizontal"
+                android:background="@color/one_ui_bg"
+                app:layout_collapseMode="pin"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <TextView
+                        android:id="@+id/toolbar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Galaxy Babies"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        android:fontFamily="sans-serif"
+                        android:textStyle="bold"
+                        >
+                    </TextView>
+
+                    <LinearLayout
+                        android:id="@+id/li_babies"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_alignParentRight="true"
+                        >
+
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/baseline_layers_24"
+                            android:layout_gravity="center_vertical"
+                            />
+
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appbar"
+        android:layout_above="@+id/rl_comment"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/one_ui_margin_vertical"
+            >
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                app:cardCornerRadius="@dimen/one_ui_radius_lg"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@android:color/white"
+                android:layout_marginBottom="@dimen/one_ui_margin_vertical"
+                >
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/one_ui_margin_horizontal"
+                        android:layout_marginTop="@dimen/one_ui_margin_vertical"
+                        >
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/img_profile"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:scaleType="centerCrop"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/header"
+                            app:civ_border_width="1dp"
+                            app:civ_border_color="#FFFFFF"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            >
+
+                            <TextView
+                                android:id="@+id/tv_nickname"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:text="Nickname"
+                                android:textSize="@dimen/one_ui_font_sub_header"
+                                android:fontFamily="sans-serif-medium"
+                                android:textStyle="bold"
+                                android:textColor="@android:color/black"
+                                android:gravity="bottom"
+                                android:paddingBottom="1dp"
+                                />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:id="@+id/tv_detail"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="Detail"
+                                    android:textSize="@dimen/one_ui_font_sub_header"
+                                    android:fontFamily="sans-serif"
+                                    android:textColor="@android:color/darker_gray"
+                                    android:gravity="top"
+                                    android:paddingTop="1dp"
+                                    />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="18dp"
+                                    android:orientation="horizontal"
+                                    android:layout_alignParentRight="true"
+                                    android:gravity="center_vertical"
+                                    android:paddingTop="1dp"
+                                    >
+
+                                    <ImageView
+                                        android:layout_width="18dp"
+                                        android:layout_height="18dp"
+                                        android:src="@drawable/baseline_layers_24"
+                                        android:layout_marginRight="2dp"
+                                        android:layout_gravity="center_vertical"
+                                        />
+
+
+                                    <TextView
+                                        android:id="@+id/tv_viewCnt"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:text="0"
+                                        android:textSize="@dimen/one_ui_font_sub_header"
+                                        android:fontFamily="sans-serif"
+                                        android:textColor="@android:color/darker_gray"
+                                        android:gravity="center_vertical"
+                                        />
+
+                                </LinearLayout>
+
+                            </RelativeLayout>
+
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="@dimen/one_ui_margin_vertical"
+                        android:paddingHorizontal="@dimen/one_ui_margin_horizontal"
+                        android:text="Title"
+                        android:textSize="@dimen/one_ui_font_title"
+                        android:fontFamily="sans-serif-medium"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        />
+
+                    <ImageView
+                        android:id="@+id/img_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/profile"
+                        android:layout_marginBottom="@dimen/one_ui_margin_vertical"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/one_ui_margin_vertical"
+                        android:paddingHorizontal="@dimen/one_ui_margin_horizontal"
+                        android:text="@string/lorem_ipsum"
+                        android:textSize="@dimen/one_ui_font_main_list"
+                        android:fontFamily="sans-serif-light"
+                        android:textColor="@android:color/black"
+                        />
+
+
+
+
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/one_ui_margin_vertical"
+                android:paddingHorizontal="@dimen/one_ui_margin_horizontal"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    >
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/baseline_layers_24"
+                        android:layout_marginRight="5dp"
+                        />
+                    <TextView
+                        android:id="@+id/tv_commentCnt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@android:color/darker_gray"
+                        android:fontFamily="sans-serif"
+                        android:textSize="@dimen/one_ui_font_text_button"
+                        android:gravity="center_vertical"
+                        />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+<!--            Comment             -->
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                app:cardCornerRadius="@dimen/one_ui_radius_lg"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@android:color/white"
+                android:layout_marginBottom="@dimen/one_ui_margin_vertical"
+                >
+
+                <LinearLayout
+                    android:id="@+id/li_comments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="@dimen/one_ui_margin_horizontal"
+                    android:showDividers="middle"
+                    android:divider="@drawable/vertical_divider"
+                    >
+
+
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/rl_comment"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="10dp"
+        >
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardBackgroundColor="@color/one_ui_bg"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="10dp"
+                    android:layout_toLeftOf="@+id/btn_send"
+                    >
+
+                    <ImageView
+                        android:id="@+id/btn_img"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/baseline_layers_24"
+                        android:layout_marginRight="5dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/et_comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:hint="Please input text"
+                        android:textSize="@dimen/one_ui_font_sub_header"
+                        />
+
+                </LinearLayout>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btn_send"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    app:cardBackgroundColor="@color/pastel_blue"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="0dp"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="등록"
+                        android:textColor="@android:color/white"
+                        android:gravity="center"
+                        android:textSize="@dimen/one_ui_font_sub_list"
+                        android:fontFamily="sans-serif-light"
+                        />
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

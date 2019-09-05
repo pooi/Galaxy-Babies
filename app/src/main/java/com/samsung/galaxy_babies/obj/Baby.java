@@ -1,11 +1,12 @@
 package com.samsung.galaxy_babies.obj;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
-public class Baby {
+public class Baby implements Serializable {
 
     public enum Gender{
         NONE,

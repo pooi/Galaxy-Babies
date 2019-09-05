@@ -3,14 +3,22 @@ package com.samsung.galaxy_babies.obj;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Board {
+public class Board implements Serializable {
 
     String mainImg, title, content;
     Baby baby;
     User user;
     int viewCnt, commentCnt, likeCnt;
+
+    private ArrayList<Comment> comments;
+
+
+
 
     public String getMainImg() {
         return mainImg;
@@ -74,5 +82,13 @@ public class Board {
 
     public void setLikeCnt(int likeCnt) {
         this.likeCnt = likeCnt;
+    }
+
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<Comment> comments) {
+        this.comments = comments;
     }
 }

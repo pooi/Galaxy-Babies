@@ -1,9 +1,10 @@
 package com.samsung.galaxy_babies.obj;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class User {
+public class User implements Serializable {
 
     private String id;
     private String email;

@@ -11,6 +11,7 @@
     android:layout_marginVertical="@dimen/one_ui_margin_vertical"
     >
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
