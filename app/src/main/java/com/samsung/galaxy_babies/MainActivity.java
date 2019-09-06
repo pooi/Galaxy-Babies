@@ -16,6 +16,7 @@ import com.samsung.galaxy_babies.fragment.MainFragment;
 import com.samsung.galaxy_babies.fragment.MyBabyFragment;
 import com.samsung.galaxy_babies.fragment.NoteFragment;
 import com.samsung.galaxy_babies.obj.Baby;
+import com.samsung.galaxy_babies.obj.BabyData;
 import com.samsung.galaxy_babies.obj.Measure;
 import com.samsung.galaxy_babies.obj.User;
 
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity{
     final EmptyFragment emptyFragment = new EmptyFragment();
 
     private User user;
+    private BabyData babyData = new BabyData();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,8 +94,9 @@ public class MainActivity extends AppCompatActivity{
             baby1.setId("2222222");
             ArrayList<Measure> heights = new ArrayList<>();
             ArrayList<Measure> weights = new ArrayList<>();
-            heights.add(new Measure(new GregorianCalendar(2019, Calendar.JANUARY, 8), 3.7));
-            weights.add(new Measure(new GregorianCalendar(2019, Calendar.JANUARY, 8), 3.5));
+            Calendar defaultDate = new GregorianCalendar(2019, Calendar.JANUARY, 8);
+            heights.add(new Measure(defaultDate, babyData.getDummyHeight(Baby.Gender.WOMEN, defaultDate)));
+            weights.add(new Measure(defaultDate, babyData.getDummyWeight(Baby.Gender.WOMEN, defaultDate)));
             for (int i = 1; i < 10; i++) {
                 Measure preH = heights.get(i-1);
                 Measure preW = weights.get(i-1);
@@ -126,8 +129,9 @@ public class MainActivity extends AppCompatActivity{
             baby2.setId("3333333");
             ArrayList<Measure> heights = new ArrayList<>();
             ArrayList<Measure> weights = new ArrayList<>();
-            heights.add(new Measure(new GregorianCalendar(2019, Calendar.MARCH, 2), 2.7));
-            weights.add(new Measure(new GregorianCalendar(2019, Calendar.MARCH, 2), 2.9));
+            Calendar defaultDate = new GregorianCalendar(2019, Calendar.MARCH, 2);
+            heights.add(new Measure(defaultDate, babyData.getDummyHeight(Baby.Gender.MEN, defaultDate)));
+            weights.add(new Measure(defaultDate, babyData.getDummyWeight(Baby.Gender.MEN, defaultDate)));
             for (int i = 1; i < 10; i++) {
                 Measure preH = heights.get(i-1);
                 Measure preW = weights.get(i-1);

@@ -352,6 +352,175 @@
 
                 </androidx.cardview.widget.CardView>
 
+<!-- 몸무게 백분율 -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="@dimen/one_ui_margin_vertical"
+                    app:cardCornerRadius="@dimen/one_ui_radius_lg"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardElevation="0dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="@dimen/one_ui_margin_horizontal"
+                        android:paddingVertical="@dimen/one_ui_margin_vertical"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="5dp"
+                            >
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/baseline_layers_24"
+                                android:layout_marginRight="5dp"
+                                />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="몸무게 백분율"
+                                android:fontFamily="sans-serif-light"
+                                android:textColor="@android:color/darker_gray"
+                                android:textSize="@dimen/one_ui_font_sub_list"
+                                android:gravity="center_vertical"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            >
+
+                            <TextView
+                                android:id="@+id/tv_weight_per"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0.0"
+                                android:fontFamily="sans-serif"
+                                android:textStyle="bold"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/one_ui_font_extend_title"
+                                android:layout_marginRight="5dp"
+                                />
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="kg"-->
+<!--                                android:fontFamily="sans-serif-light"-->
+<!--                                android:textColor="@android:color/darker_gray"-->
+<!--                                android:textSize="@dimen/one_ui_font_sub_list"-->
+<!--                                />-->
+
+                        </LinearLayout>
+
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/chart_weight_per"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp" />
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+<!--                키 백분율               -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="@dimen/one_ui_margin_vertical"
+                    app:cardCornerRadius="@dimen/one_ui_radius_lg"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardElevation="0dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="@dimen/one_ui_margin_horizontal"
+                        android:paddingVertical="@dimen/one_ui_margin_vertical"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="5dp"
+                            >
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/baseline_layers_24"
+                                android:layout_marginRight="5dp"
+                                />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="키 백분율"
+                                android:fontFamily="sans-serif-light"
+                                android:textColor="@android:color/darker_gray"
+                                android:textSize="@dimen/one_ui_font_sub_list"
+                                android:gravity="center_vertical"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            >
+
+                            <TextView
+                                android:id="@+id/tv_height_per"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0.0"
+                                android:fontFamily="sans-serif"
+                                android:textStyle="bold"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/one_ui_font_extend_title"
+                                android:layout_marginRight="5dp"
+                                />
+
+                            <!--                            <TextView-->
+                            <!--                                android:layout_width="wrap_content"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:text="kg"-->
+                            <!--                                android:fontFamily="sans-serif-light"-->
+                            <!--                                android:textColor="@android:color/darker_gray"-->
+                            <!--                                android:textSize="@dimen/one_ui_font_sub_list"-->
+                            <!--                                />-->
+
+                        </LinearLayout>
+
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/chart_height_per"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp" />
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

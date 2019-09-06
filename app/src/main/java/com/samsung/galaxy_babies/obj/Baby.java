@@ -88,7 +88,7 @@ public class Baby implements Serializable {
     }
 
     public String getDescription(){
-        return String.format("%d년 %d월 %d일 (%s개월)", this.birthday.get(Calendar.YEAR), this.birthday.get(Calendar.MONTH)+1, this.birthday.get(Calendar.DAY_OF_MONTH), getMonthDiff());
+        return String.format("%d년 %d월 %d일 (%s개월)", this.birthday.get(Calendar.YEAR), this.birthday.get(Calendar.MONTH)+1, this.birthday.get(Calendar.DAY_OF_MONTH), BabyData.getAge(this.birthday, Calendar.getInstance()));
     }
 
 
@@ -114,6 +114,14 @@ public class Baby implements Serializable {
 
     public String getWeightString(){
         return String.format("%.1f", this.getWeights().get(this.getWeights().size()-1).value);
+    }
+
+    public double getLastWeight(){
+        return this.getWeights().get(this.getWeights().size()-1).value;
+    }
+
+    public double getLastHeight(){
+        return this.getHeights().get(this.getHeights().size()-1).value;
     }
 
 

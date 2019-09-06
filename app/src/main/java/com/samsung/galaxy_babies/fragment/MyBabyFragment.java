@@ -25,7 +25,10 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.samsung.galaxy_babies.MainActivity;
 import com.samsung.galaxy_babies.R;
+import com.samsung.galaxy_babies.data.HeightData;
+import com.samsung.galaxy_babies.data.WeightData;
 import com.samsung.galaxy_babies.obj.Baby;
+import com.samsung.galaxy_babies.obj.BabyData;
 import com.samsung.galaxy_babies.obj.Measure;
 import com.samsung.galaxy_babies.obj.User;
 import com.squareup.picasso.Picasso;
@@ -54,9 +57,14 @@ public class MyBabyFragment extends BaseFragment {
     private LineChart chartWeight;
     private TextView tv_height;
     private LineChart chartHeight;
+    private TextView tv_weight_per;
+    private LineChart chartWeightPer;
+    private TextView tv_height_per;
+    private LineChart chartHeightPer;
 
     private User user;
     private Baby selectedBaby;
+    private BabyData babyData = new BabyData();
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -96,6 +104,10 @@ public class MyBabyFragment extends BaseFragment {
         chartWeight = (LineChart) view.findViewById(R.id.chart_weight);
         tv_height = (TextView) view.findViewById(R.id.tv_height);
         chartHeight = (LineChart) view.findViewById(R.id.chart_height);
+        tv_weight_per = (TextView) view.findViewById(R.id.tv_weight_per);
+        chartWeightPer = (LineChart) view.findViewById(R.id.chart_weight_per);
+        tv_height_per = (TextView) view.findViewById(R.id.tv_height_per);
+        chartHeightPer = (LineChart) view.findViewById(R.id.chart_height_per);
 
 
         for(Baby baby : user.getBabies()){
@@ -146,6 +158,13 @@ public class MyBabyFragment extends BaseFragment {
             tv_height.setText(selectedBaby.getHeightString());
             drawMeasureChart(chartHeight, selectedBaby.getHeights(), "cm");
 
+            int wperIndex = babyData.getKgPercentileIndex(selectedBaby.getGender(), selectedBaby.getLastWeight(), selectedBaby.getBirthday());
+            tv_weight_per.setText(babyData.getHeader()[wperIndex]);
+            drawPerChart(chartWeightPer, HeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday()), "kg");
+
+            int hperIndex = babyData.getCmPercentileIndex(selectedBaby.getGender(), selectedBaby.getLastHeight(), selectedBaby.getBirthday());
+            tv_height_per.setText(babyData.getHeader()[hperIndex]);
+            drawPerChart(chartHeightPer, HeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday()), "cm");
 
         }
 
@@ -189,6 +208,72 @@ public class MyBabyFragment extends BaseFragment {
         set1.setValueTextColor(getColorId(context, R.color.orange));
         set1.setLineWidth(2f);
         set1.setCircleColor(getColorId(context, R.color.orange));
+        set1.setDrawCircles(true);
+        set1.setDrawValues(true);
+//                set1.setFillAlpha(65);
+//                set1.setFillColor(ColorTemplate.getHoloBlue());
+        set1.setHighLightColor(getColorId(context, R.color.dark_gray));
+        set1.setDrawCircleHole(true);
+        set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+
+        // create a data object with the data sets
+        LineData data = new LineData(set1);
+        data.setValueTextColor(getColorId(context, R.color.dark_gray));
+        data.setValueTextSize(9f);
+        data.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return String.format("%.1f%s", value, unit);
+            }
+        });
+        data.setValueTypeface(Typeface.create(Typeface.SANS_SERIF, Typeface.NORMAL));
+
+        // set data
+        chart.setData(data);
+        chart.setBorderColor(getColorId(context, R.color.dark_gray));
+        chart.getLegend().setEnabled(false);
+        chart.getDescription().setEnabled(false);
+
+        chart.invalidate(); // refresh
+
+    }
+
+    public void drawPerChart(LineChart chart,double [] list, final String unit){
+
+        final String [] header = BabyData.getHeader();
+
+        List<Entry> entries = new ArrayList<>();
+        for (int i=0; i<list.length; i++) {
+            entries.add(new Entry((float)i, (float)list[i]));
+        }
+
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setTextSize(8f);
+        xAxis.setTextColor(Color.BLACK);
+        xAxis.setDrawAxisLine(false);
+        xAxis.setDrawGridLines(false);
+        xAxis.setTextColor(Color.BLACK);
+        xAxis.setCenterAxisLabels(false);
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return header[(int)value];
+            }
+        });
+
+        YAxis leftAxis = chart.getAxisLeft();
+        leftAxis.setEnabled(false);
+
+        YAxis rightAxis = chart.getAxisRight();
+        rightAxis.setEnabled(false);
+
+        LineDataSet set1 = new LineDataSet(entries, "");
+        set1.setAxisDependency(YAxis.AxisDependency.LEFT);
+        set1.setColor(getColorId(context, R.color.red));
+        set1.setValueTextColor(getColorId(context, R.color.red));
+        set1.setLineWidth(2f);
+        set1.setCircleColor(getColorId(context, R.color.red));
         set1.setDrawCircles(true);
         set1.setDrawValues(true);
 //                set1.setFillAlpha(65);
