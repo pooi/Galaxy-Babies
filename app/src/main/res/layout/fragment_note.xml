@@ -68,7 +68,7 @@
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/baseline_layers_24"
+                            android:src="@drawable/baseline_search_24_black"
                             android:layout_gravity="center_vertical"
                             />
 

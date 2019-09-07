@@ -13,7 +13,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:adjustViewBounds="true"
@@ -67,15 +67,27 @@
 
                     <TextView
                         android:id="@+id/toolbar_title"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="Galaxy Babies"
                         android:textColor="@android:color/white"
                         android:textSize="20sp"
                         android:textStyle="bold"
+                        android:layout_toLeftOf="@+id/li_babies"
                         >
                     </TextView>
+
+                    <LinearLayout
+                        android:id="@+id/li_babies"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_alignParentRight="true"
+                        >
+
+
+                    </LinearLayout>
 
                 </RelativeLayout>
 
@@ -86,16 +98,41 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/scrollableview"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/sv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/one_ui_bg"
-        android:paddingVertical="@dimen/one_ui_margin_vertical"
         android:clipToPadding="false"
         android:clipChildren="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        />
+        >
+
+        <LinearLayout
+            android:id="@+id/li_sv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/one_ui_margin_vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
+
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/scrollableview"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="@color/one_ui_bg"-->
+<!--        android:paddingVertical="@dimen/one_ui_margin_vertical"-->
+<!--        android:clipToPadding="false"-->
+<!--        android:clipChildren="false"-->
+<!--        app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+<!--        />-->
 
 
 

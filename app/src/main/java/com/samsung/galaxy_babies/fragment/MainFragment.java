@@ -6,29 +6,38 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.core.widget.NestedScrollView;
 
+import com.github.mikephil.charting.charts.LineChart;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.samsung.galaxy_babies.MainActivity;
 import com.samsung.galaxy_babies.R;
-import com.samsung.galaxy_babies.adapter.MainListCustomAdapter;
+import com.samsung.galaxy_babies.data.HeightData;
+import com.samsung.galaxy_babies.data.WeightData;
+import com.samsung.galaxy_babies.obj.Baby;
+import com.samsung.galaxy_babies.obj.BabyData;
+import com.samsung.galaxy_babies.obj.User;
 import com.samsung.galaxy_babies.util.AppBarStateChangeListener;
 import com.samsung.galaxy_babies.util.OnAdapterSupport;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainFragment extends BaseFragment implements OnAdapterSupport {
     // UI
@@ -42,10 +51,21 @@ public class MainFragment extends BaseFragment implements OnAdapterSupport {
     private Toolbar toolbar;
     private TextView toolbarTitle;
     private CollapsingToolbarLayout collapsingToolbar;
+    private LinearLayout li_babies;
 
-    private RecyclerView rv;
-    private LinearLayoutManager mLinearLayoutManager;
-    private MainListCustomAdapter adapter;
+
+
+
+    private NestedScrollView scrollView;
+    private LinearLayout li_sv;
+
+//    private RecyclerView rv;
+//    private LinearLayoutManager mLinearLayoutManager;
+//    private MainListCustomAdapter adapter;
+
+    private User user;
+    private Baby selectedBaby;
+    private BabyData babyData = new BabyData();
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -61,6 +81,8 @@ public class MainFragment extends BaseFragment implements OnAdapterSupport {
         view = inflater.inflate(R.layout.fragment_main, container, false);
         context = container.getContext();
         activity = getActivity();
+        user = ((MainActivity)getActivity()).getUser();
+        selectedBaby = user.getBabies().get(0);
 
 //        getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 //        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
@@ -72,7 +94,120 @@ public class MainFragment extends BaseFragment implements OnAdapterSupport {
 
     }
 
+    public void updatePage(){
+        if(selectedBaby != null) {
+            li_sv.removeAllViews();
+            addProfileCard();
+            addCards();
+        }
+    }
 
+    public void addProfileCard(){
+        View card = LayoutInflater.from(context).inflate(R.layout.list_card_profile, li_sv, false);
+
+        TextView tv_name = (TextView) card.findViewById(R.id.tv_name);
+        TextView tv_description = (TextView) card.findViewById(R.id.tv_description);
+        CircleImageView profileImg = (CircleImageView) card.findViewById(R.id.profile_image);
+
+        tv_name.setText(selectedBaby.getName());
+        tv_description.setText(selectedBaby.getDescription());
+        Picasso.get().load(selectedBaby.getProfileImg()).into(profileImg);
+
+        li_sv.addView(card);
+    }
+
+    public void addCards(){
+        {
+            View card = LayoutInflater.from(context).inflate(R.layout.list_card_info, li_sv, false);
+
+            ImageView logo = (ImageView) card.findViewById(R.id.img_logo);
+            TextView tv_subtitle = (TextView) card.findViewById(R.id.tv_subtitle);
+            TextView tv_title = (TextView) card.findViewById(R.id.tv_title);
+            TextView tv_content = (TextView) card.findViewById(R.id.tv_content);
+            LineChart lineChart = (LineChart) card.findViewById(R.id.chart);
+            lineChart.setVisibility(View.VISIBLE);
+
+            int wperIndex = babyData.getKgPercentileIndex(selectedBaby.getGender(), selectedBaby.getLastWeight(), selectedBaby.getBirthday());
+
+            int centerIndex = BabyData.getHeader().length/2;
+
+            double diff = WeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday())[centerIndex]
+                    - WeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday())[wperIndex];
+
+            logo.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.baseline_info_24_blue));
+            tv_title.setText("정보");
+            tv_subtitle.setText("몸무게 백분율 정보");
+            tv_content.setText(String.format("%d개월 유아 평균 몸무게보다 %.1fkg만큼 차이납니다.", BabyData.getAge(selectedBaby.getBirthday(), Calendar.getInstance()), diff));
+            babyData.drawPerChart(context, lineChart, HeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday()), "kg");
+
+            li_sv.addView(card);
+        }
+
+        {
+            View card = LayoutInflater.from(context).inflate(R.layout.list_card_info, li_sv, false);
+
+            ImageView logo = (ImageView) card.findViewById(R.id.img_logo);
+            TextView tv_subtitle = (TextView) card.findViewById(R.id.tv_subtitle);
+            TextView tv_title = (TextView) card.findViewById(R.id.tv_title);
+            TextView tv_content = (TextView) card.findViewById(R.id.tv_content);
+            LineChart lineChart = (LineChart) card.findViewById(R.id.chart);
+            lineChart.setVisibility(View.GONE);
+
+            logo.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.baseline_warning_24_orange));
+            tv_title.setText("경고");
+            tv_subtitle.setText("몸무게 측정 한달 경과");
+            tv_content.setText("몸무게를 측정해주세요.");
+
+            li_sv.addView(card);
+
+        }
+
+        {
+            View card = LayoutInflater.from(context).inflate(R.layout.list_card_info, li_sv, false);
+
+            ImageView logo = (ImageView) card.findViewById(R.id.img_logo);
+            TextView tv_subtitle = (TextView) card.findViewById(R.id.tv_subtitle);
+            TextView tv_title = (TextView) card.findViewById(R.id.tv_title);
+            TextView tv_content = (TextView) card.findViewById(R.id.tv_content);
+            LineChart lineChart = (LineChart) card.findViewById(R.id.chart);
+            lineChart.setVisibility(View.VISIBLE);
+
+            int hperIndex = babyData.getCmPercentileIndex(selectedBaby.getGender(), selectedBaby.getLastWeight(), selectedBaby.getBirthday());
+
+            int centerIndex = BabyData.getHeader().length/2;
+
+            double diff = HeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday())[centerIndex]
+                    - HeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday())[hperIndex];
+
+            logo.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.baseline_info_24_blue));
+            tv_title.setText("정보");
+            tv_subtitle.setText("키 백분율 정보");
+            tv_content.setText(String.format("%d개월 유아 평균 키보다 %.1fcm만큼 차이납니다.", BabyData.getAge(selectedBaby.getBirthday(), Calendar.getInstance()), diff));
+            babyData.drawPerChart(context, lineChart, HeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday()), "cm");
+
+            li_sv.addView(card);
+        }
+
+        {
+            View card = LayoutInflater.from(context).inflate(R.layout.list_card_info, li_sv, false);
+
+            ImageView logo = (ImageView) card.findViewById(R.id.img_logo);
+            TextView tv_subtitle = (TextView) card.findViewById(R.id.tv_subtitle);
+            TextView tv_title = (TextView) card.findViewById(R.id.tv_title);
+            TextView tv_content = (TextView) card.findViewById(R.id.tv_content);
+            LineChart lineChart = (LineChart) card.findViewById(R.id.chart);
+            lineChart.setVisibility(View.GONE);
+
+            logo.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.baseline_warning_24_orange));
+            tv_title.setText("경고");
+            tv_subtitle.setText("키 측정 한달 경과");
+            tv_content.setText("키를 측정해주세요.");
+
+            li_sv.addView(card);
+
+        }
+
+    }
 
 
     public void init(){
@@ -116,13 +251,45 @@ public class MainFragment extends BaseFragment implements OnAdapterSupport {
             }
         });
 
+        li_babies = (LinearLayout) view.findViewById(R.id.li_babies);
+        for(Baby baby : user.getBabies()){
+            final Baby b = baby;
+            CircleImageView imageView = new CircleImageView(context);
 
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                    getDP(context, 40),
+                    RelativeLayout.LayoutParams.WRAP_CONTENT
+            );
+            params.setMargins(getDP(context, 5),0,0,0); // left, top, right, bottom
+            imageView.setLayoutParams(params);
 
-        mLinearLayoutManager = new LinearLayoutManager(context);
-        mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        rv = (RecyclerView) view.findViewById(R.id.scrollableview);
-        rv.setHasFixedSize(true);
-        rv.setLayoutManager(mLinearLayoutManager);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setBorderWidth(1);
+            imageView.setBorderColor(getColorId(context, R.color.white));
+
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectedBaby = b;
+                    updatePage();
+                }
+            });
+
+            Picasso.get().load(baby.getProfileImg()).into(imageView);
+
+            li_babies.addView(imageView);
+        }
+
+        scrollView = (NestedScrollView) view.findViewById(R.id.sv);
+        li_sv = (LinearLayout) view.findViewById(R.id.li_sv);
+
+        updatePage();
+
+//        mLinearLayoutManager = new LinearLayoutManager(context);
+//        mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+//        rv = (RecyclerView) view.findViewById(R.id.scrollableview);
+//        rv.setHasFixedSize(true);
+//        rv.setLayoutManager(mLinearLayoutManager);
 
 
 //        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
@@ -135,7 +302,7 @@ public class MainFragment extends BaseFragment implements OnAdapterSupport {
 //            }
 //        });
 
-        getList();
+//        getList();
 
     }
 
@@ -145,28 +312,28 @@ public class MainFragment extends BaseFragment implements OnAdapterSupport {
 //        return true;
 //    }
 
-    private void getList(){
-
-        for(int i=0; i<20; i++){
-            list.add(i+"");
-        }
-
-        if(adapter != null){
-            adapter.setLoaded();
-        }
-
-        makeList();
-    }
-
-    public void makeList(){
-
-        adapter = new MainListCustomAdapter(context, list, rv, this);
-
-        rv.setAdapter(adapter);
-
-        adapter.notifyDataSetChanged();
-
-    }
+//    private void getList(){
+//
+//        for(int i=0; i<20; i++){
+//            list.add(i+"");
+//        }
+//
+//        if(adapter != null){
+//            adapter.setLoaded();
+//        }
+//
+//        makeList();
+//    }
+//
+//    public void makeList(){
+//
+//        adapter = new MainListCustomAdapter(context, list, rv, this);
+//
+//        rv.setAdapter(adapter);
+//
+//        adapter.notifyDataSetChanged();
+//
+//    }
 
     @Override
     public void showView() {

@@ -1,9 +1,25 @@
 package com.samsung.galaxy_babies.obj;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
+
+import androidx.core.content.ContextCompat;
+
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.samsung.galaxy_babies.R;
 import com.samsung.galaxy_babies.data.HeightData;
 import com.samsung.galaxy_babies.data.WeightData;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Random;
 
 public class BabyData {
@@ -95,5 +111,81 @@ public class BabyData {
         else
             values = HeightData.girl[age];
         return values[random.nextInt(values.length)];
+    }
+
+    public int getColorId(Context context, int id){
+        return ContextCompat.getColor(context, id);
+    }
+
+    public int getDP(Context context, int dps){
+        float scale = context.getResources().getDisplayMetrics().density;
+        int pixels = (int) (dps * scale + 0.5f);
+        return pixels;
+    }
+
+    public void drawPerChart(Context context, LineChart chart, double [] list, final String unit){
+
+        final String [] header = BabyData.getHeader();
+
+        List<Entry> entries = new ArrayList<>();
+        for (int i=0; i<list.length; i++) {
+            entries.add(new Entry((float)i, (float)list[i]));
+        }
+
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setTextSize(8f);
+        xAxis.setTextColor(Color.BLACK);
+        xAxis.setDrawAxisLine(false);
+        xAxis.setDrawGridLines(false);
+        xAxis.setTextColor(Color.BLACK);
+        xAxis.setCenterAxisLabels(false);
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return header[(int)value];
+            }
+        });
+
+        YAxis leftAxis = chart.getAxisLeft();
+        leftAxis.setEnabled(false);
+
+        YAxis rightAxis = chart.getAxisRight();
+        rightAxis.setEnabled(false);
+
+        LineDataSet set1 = new LineDataSet(entries, "");
+        set1.setAxisDependency(YAxis.AxisDependency.LEFT);
+        set1.setColor(getColorId(context, R.color.red));
+        set1.setValueTextColor(getColorId(context, R.color.red));
+        set1.setLineWidth(2f);
+        set1.setCircleColor(getColorId(context, R.color.red));
+        set1.setDrawCircles(true);
+        set1.setDrawValues(true);
+//                set1.setFillAlpha(65);
+//                set1.setFillColor(ColorTemplate.getHoloBlue());
+        set1.setHighLightColor(getColorId(context, R.color.dark_gray));
+        set1.setDrawCircleHole(true);
+        set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+
+        // create a data object with the data sets
+        LineData data = new LineData(set1);
+        data.setValueTextColor(getColorId(context, R.color.dark_gray));
+        data.setValueTextSize(9f);
+        data.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return String.format("%.1f%s", value, unit);
+            }
+        });
+        data.setValueTypeface(Typeface.create(Typeface.SANS_SERIF, Typeface.NORMAL));
+
+        // set data
+        chart.setData(data);
+        chart.setBorderColor(getColorId(context, R.color.dark_gray));
+        chart.getLegend().setEnabled(false);
+        chart.getDescription().setEnabled(false);
+
+        chart.invalidate(); // refresh
+
     }
 }

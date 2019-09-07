@@ -59,7 +59,7 @@
                         android:id="@+id/btn_more"
                         android:layout_width="18dp"
                         android:layout_height="match_parent"
-                        android:src="@drawable/baseline_layers_24"
+                        android:src="@drawable/baseline_more_vert_24_gray"
                         android:layout_marginRight="2dp"
                         android:layout_gravity="center_vertical"
                         android:layout_alignParentRight="true"
