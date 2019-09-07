@@ -137,7 +137,7 @@ public class MainFragment extends BaseFragment implements OnAdapterSupport {
             logo.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.baseline_info_24_blue));
             tv_title.setText("정보");
             tv_subtitle.setText("몸무게 백분율 정보");
-            tv_content.setText(String.format("%d개월 유아 평균 몸무게보다 %.1fkg만큼 차이납니다.", BabyData.getAge(selectedBaby.getBirthday(), Calendar.getInstance()), diff));
+            tv_content.setText(String.format("%d개월 유아 평균 몸무게보다 %s%.1fkg만큼 차이납니다.", BabyData.getAge(selectedBaby.getBirthday(), Calendar.getInstance()), (diff > 0.0 ? "+" : ""), diff));
             babyData.drawPerChart(context, lineChart, HeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday()), "kg");
 
             li_sv.addView(card);
@@ -182,7 +182,7 @@ public class MainFragment extends BaseFragment implements OnAdapterSupport {
             logo.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.baseline_info_24_blue));
             tv_title.setText("정보");
             tv_subtitle.setText("키 백분율 정보");
-            tv_content.setText(String.format("%d개월 유아 평균 키보다 %.1fcm만큼 차이납니다.", BabyData.getAge(selectedBaby.getBirthday(), Calendar.getInstance()), diff));
+            tv_content.setText(String.format("%d개월 유아 평균 키보다 %s%.1fcm만큼 차이납니다.", BabyData.getAge(selectedBaby.getBirthday(), Calendar.getInstance()), (diff > 0.0 ? "+" : ""), diff));
             babyData.drawPerChart(context, lineChart, HeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday()), "cm");
 
             li_sv.addView(card);
