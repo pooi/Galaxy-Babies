@@ -131,14 +131,14 @@ public class MainFragment extends BaseFragment implements OnAdapterSupport {
 
             int centerIndex = BabyData.getHeader().length/2;
 
-            double diff = WeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday())[centerIndex]
-                    - WeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday())[wperIndex];
+            double diff = WeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday())[wperIndex]
+                    - WeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday())[centerIndex];
 
             logo.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.baseline_info_24_blue));
             tv_title.setText("정보");
             tv_subtitle.setText("몸무게 백분율 정보");
-            tv_content.setText(String.format("%d개월 유아 평균 몸무게보다 %s%.1fkg만큼 차이납니다.", BabyData.getAge(selectedBaby.getBirthday(), Calendar.getInstance()), (diff > 0.0 ? "+" : ""), diff));
-            babyData.drawPerChart(context, lineChart, HeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday()), "kg");
+            tv_content.setText(String.format("%d개월 유아 평균 몸무게보다 %s%.1fkg 차이납니다.", BabyData.getAge(selectedBaby.getBirthday(), Calendar.getInstance()), (diff > 0.0 ? "+" : ""), diff));
+            babyData.drawPerChart(context, lineChart, WeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday()), wperIndex, "kg");
 
             li_sv.addView(card);
         }
@@ -172,18 +172,18 @@ public class MainFragment extends BaseFragment implements OnAdapterSupport {
             LineChart lineChart = (LineChart) card.findViewById(R.id.chart);
             lineChart.setVisibility(View.VISIBLE);
 
-            int hperIndex = babyData.getCmPercentileIndex(selectedBaby.getGender(), selectedBaby.getLastWeight(), selectedBaby.getBirthday());
+            int hperIndex = babyData.getCmPercentileIndex(selectedBaby.getGender(), selectedBaby.getLastHeight(), selectedBaby.getBirthday());
 
             int centerIndex = BabyData.getHeader().length/2;
 
-            double diff = HeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday())[centerIndex]
-                    - HeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday())[hperIndex];
+            double diff = HeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday())[hperIndex]
+                    - HeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday())[centerIndex];
 
             logo.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.baseline_info_24_blue));
             tv_title.setText("정보");
             tv_subtitle.setText("키 백분율 정보");
-            tv_content.setText(String.format("%d개월 유아 평균 키보다 %s%.1fcm만큼 차이납니다.", BabyData.getAge(selectedBaby.getBirthday(), Calendar.getInstance()), (diff > 0.0 ? "+" : ""), diff));
-            babyData.drawPerChart(context, lineChart, HeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday()), "cm");
+            tv_content.setText(String.format("%d개월 유아 평균 키보다 %s%.1fcm 차이납니다.", BabyData.getAge(selectedBaby.getBirthday(), Calendar.getInstance()), (diff > 0.0 ? "+" : ""), diff));
+            babyData.drawPerChart(context, lineChart, HeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday()), hperIndex, "cm");
 
             li_sv.addView(card);
         }

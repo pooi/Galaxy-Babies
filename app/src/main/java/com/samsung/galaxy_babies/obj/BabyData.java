@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 
 import androidx.core.content.ContextCompat;
 
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -13,6 +14,8 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.utils.MPPointF;
 import com.samsung.galaxy_babies.R;
 import com.samsung.galaxy_babies.data.HeightData;
 import com.samsung.galaxy_babies.data.WeightData;
@@ -123,7 +126,7 @@ public class BabyData {
         return pixels;
     }
 
-    public void drawPerChart(Context context, LineChart chart, double [] list, final String unit){
+    public void drawPerChart(Context context, LineChart chart, double [] list, int highlightIndex, final String unit){
 
         final String [] header = BabyData.getHeader();
 
@@ -147,6 +150,7 @@ public class BabyData {
             }
         });
 
+
         YAxis leftAxis = chart.getAxisLeft();
         leftAxis.setEnabled(false);
 
@@ -163,9 +167,14 @@ public class BabyData {
         set1.setDrawValues(true);
 //                set1.setFillAlpha(65);
 //                set1.setFillColor(ColorTemplate.getHoloBlue());
-        set1.setHighLightColor(getColorId(context, R.color.dark_gray));
+        set1.setHighlightEnabled(true);
+//        set1.setDrawHighlightIndicators(false);
+//        set1.setDrawHorizontalHighlightIndicator(false);
+        set1.setHighLightColor(getColorId(context, R.color.red));
         set1.setDrawCircleHole(true);
         set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        set1.getEntryForIndex(highlightIndex).setIcon(context.getDrawable(R.drawable.baseline_where_to_vote_24_red));
+        set1.setIconsOffset(MPPointF.getInstance(0, -25));
 
         // create a data object with the data sets
         LineData data = new LineData(set1);
@@ -184,6 +193,10 @@ public class BabyData {
         chart.setBorderColor(getColorId(context, R.color.dark_gray));
         chart.getLegend().setEnabled(false);
         chart.getDescription().setEnabled(false);
+//        System.out.println(chart.getWidth() + " " +  chart.getHeight());
+//        chart.highlightValue(chart.getHighlighter().getHighlight(highlightIndex-1, highlightIndex-1));
+//        chart.highlightValue(highlightIndex, highlightIndex, false);
+//        chart.animateX(1500);
 
         chart.invalidate(); // refresh
 

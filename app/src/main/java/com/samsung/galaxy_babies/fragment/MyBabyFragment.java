@@ -23,6 +23,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.MPPointF;
 import com.samsung.galaxy_babies.MainActivity;
 import com.samsung.galaxy_babies.R;
 import com.samsung.galaxy_babies.data.HeightData;
@@ -160,11 +161,11 @@ public class MyBabyFragment extends BaseFragment {
 
             int wperIndex = babyData.getKgPercentileIndex(selectedBaby.getGender(), selectedBaby.getLastWeight(), selectedBaby.getBirthday());
             tv_weight_per.setText(babyData.getHeader()[wperIndex]);
-            drawPerChart(chartWeightPer, HeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday()), "kg");
+            drawPerChart(chartWeightPer, HeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday()), wperIndex, "kg");
 
             int hperIndex = babyData.getCmPercentileIndex(selectedBaby.getGender(), selectedBaby.getLastHeight(), selectedBaby.getBirthday());
             tv_height_per.setText(babyData.getHeader()[hperIndex]);
-            drawPerChart(chartHeightPer, HeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday()), "cm");
+            drawPerChart(chartHeightPer, HeightData.getValues(selectedBaby.getGender(), selectedBaby.getBirthday()), hperIndex, "cm");
 
         }
 
@@ -238,7 +239,7 @@ public class MyBabyFragment extends BaseFragment {
 
     }
 
-    public void drawPerChart(LineChart chart,double [] list, final String unit){
+    public void drawPerChart(LineChart chart,double [] list, int highlightIndex, final String unit){
 
         final String [] header = BabyData.getHeader();
 
@@ -281,6 +282,8 @@ public class MyBabyFragment extends BaseFragment {
         set1.setHighLightColor(getColorId(context, R.color.dark_gray));
         set1.setDrawCircleHole(true);
         set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        set1.getEntryForIndex(highlightIndex).setIcon(context.getDrawable(R.drawable.baseline_where_to_vote_24_red));
+        set1.setIconsOffset(MPPointF.getInstance(0, -25));
 
         // create a data object with the data sets
         LineData data = new LineData(set1);
